@@ -1,6 +1,5 @@
 package in.gmsk;
 
-import in.gmsk.entity.User;
 import in.gmsk.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DatabaseDemoApplication implements CommandLineRunner {
 
-    private Logger logger =
+    private final Logger logger =
             LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -23,7 +22,16 @@ public class DatabaseDemoApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        logger.info("All Users -> {} ", repository.findAll());
+    public void run(String... args) {
+
+        logger.trace("All Users -> {} ", repository.findAll());
+        logger.trace("User Id 1 -> {} ", repository.findById(1));
+        logger.trace("User name Jay Kumar -> {} ", repository.findByName("Jay Kumar"));
+        logger.trace("Deleting 2 -> No of Rows Deleted {} ", repository.deleteById(3));
+
+        /*logger.info("All Users -> {} ", repository.findAll());
+        logger.info("User Id 1 -> {} ", repository.findById(1));
+        logger.info("User name Jay Kumar -> {} ", repository.findByName("Jay Kumar"));
+        logger.info("Deleting 2 -> No of Rows Deleted {} ", repository.deleteById(3));*/
     }
 }

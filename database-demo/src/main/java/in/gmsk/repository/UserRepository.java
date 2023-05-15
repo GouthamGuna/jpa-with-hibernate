@@ -17,4 +17,22 @@ public class UserRepository {
         return jdbcTemplate.query("SELECT * FROM USERINFO",
                 new BeanPropertyRowMapper<>(User.class));
     }
+
+    public User findById(int id) {
+        return jdbcTemplate
+                .queryForObject("SELECT * FROM USERINFO WHERE id = ?",
+                        new Object[]{id},
+                        new BeanPropertyRowMapper<>(User.class));
+    }
+    public User findByName(String name) {
+        return jdbcTemplate
+                .queryForObject("SELECT * FROM USERINFO WHERE name = ?",
+                        new Object[]{name},
+                        new BeanPropertyRowMapper<>(User.class));
+    }
+
+    public int deleteById(int id) {
+        return jdbcTemplate
+                .update("DELETE FROM USERINFO WHERE id = ?", id);
+    }
 }
