@@ -35,4 +35,24 @@ public class UserRepository {
         return jdbcTemplate
                 .update("DELETE FROM USERINFO WHERE id = ?", id);
     }
+
+    public int insert(User user) {
+        return jdbcTemplate
+                .update("insert into userinfo (id,name ,location, mailid)" +
+                        " values(?, ?, ?, ?);",
+                new Object[] {
+                        user.getId(), user.getName(), user.getLocation(),
+                        user.getMailId()}
+                );
+    }
+
+    public int update(User user) {
+        return jdbcTemplate
+                .update("update userinfo set name = ?,location = ?, mailid = ?" +
+                                " where id = ?;",
+                        new Object[] {
+                                user.getName(), user.getLocation(),
+                                user.getMailId(), user.getId()}
+                );
+    }
 }
